@@ -177,64 +177,65 @@ class LinkedList {
 
   // PrintList
   // prints the list items
-  printList() {
-    var curr = this.head;
-    var str = "";
+  printList(curr = this.head) {
+    // var curr = this.head;
+    var str = "Head -> ";
     while (curr) {
-      str += curr.element + " ";
+      str += curr.element + "-> ";
       curr = curr.next;
     }
+    str += "null";
     console.log(str);
   }
+
+  reverseList() {
+    let prev = null;
+    let next = null;
+    let current = this.head;
+
+    while (current !== null) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+    // return prev;
+    console.log("Reversed link list");
+    this.printList(prev);
+  }
+
+  // Recursion method
+  // O(n) time & O(n) space
+  // reverseRecursion() {
+  //   let curr = this.head;
+  //   let preview = null;
+  //   if (!curr || !curr.next) {
+  //     return curr;
+  //   }
+  //   let tmp = reverseRecursion(curr.next);
+  //   curr.next.next = curr;
+  //   curr.next = undefined;
+  //   // console.log(tmp);
+  //   // return tmp;
+
+  //   console.log("Reversed link list");
+  //   // this.printList(tmp);
+  // }
 }
 
 // creating an object for the
 // Linkedlist class
 var ll = new LinkedList();
 
-// testing isEmpty on an empty list
-// returns true
-console.log("Is Link List empty");
-console.log(ll.isEmpty());
-
-// adding element to the list
-ll.add(10);
-
-// prints 10
-ll.printList();
-
-// returns 1
-console.log(ll.size_of_list());
-
 // adding more elements to the list
+ll.add(10);
 ll.add(20);
 ll.add(30);
 ll.add(40);
 ll.add(50);
-
-// returns 10 20 30 40 50
 ll.printList();
+ll.reverseList();
+// ll.reverseRecursion();
 
-// prints 50 from the list
-console.log("is element removed ?" + ll.removeElement(50));
-
-// prints 10 20 30 40
-ll.printList();
-
-// returns 3
-console.log("Index of 40 " + ll.indexOf(40));
-
-// insert 60 at second position
-// ll contains 10 20 60 30 40
-ll.insertAt(60, 2);
-
-ll.printList();
-
-// returns false
-console.log("is List Empty ? " + ll.isEmpty());
-
-// remove 3rd element from the list
-console.log(ll.removeFrom(3));
-
-// prints 10 20 60 40
-ll.printList();
+console.log("Is Link list Empty : ");
+console.log(ll.isEmpty());
